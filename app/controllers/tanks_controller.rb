@@ -12,7 +12,7 @@ class TanksController < ApplicationController
     @tank.user = current_user
     if @tank.save!
       flash[:success] = "Tank successfully created"
-      redirect_to tank_path(@tank)
+      redirect_to tanks_path
     else
       flash[:error] = "Something went wrong"
       render 'new'
