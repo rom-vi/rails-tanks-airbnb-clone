@@ -1,4 +1,4 @@
-
+<h1>You tanks</h1>
 <div class="">
   <% Tank.all.each do |tank| %>
     <div class="tank-card">
@@ -10,6 +10,8 @@
       <%= tank.manufacturer %>
       <%= tank.capacity %>
     </div>
-    <%= tank.photos %>
+    <% tank.photos.each do |photo| %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+    <% end %>
   <% end %>
 </div>
