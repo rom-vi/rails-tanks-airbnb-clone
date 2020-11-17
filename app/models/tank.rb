@@ -4,8 +4,7 @@ class Tank < ApplicationRecord
   has_many_attached :photos
 
   validates :name, presence: true
-  validates :weight_in_kg, presence: true, numericality: true
-  validates :description, presence: true
+  validates :weight_in_kg, numericality: true
   validates :price_per_day, presence: true, numericality: true
-  validates :capacity, presence: true, numericality: true
+  validates :capacity, numericality: true
 end
