@@ -1,0 +1,11 @@
+<p>all your tanks</p>
+<% @tanks.each do |tank| %>
+  <div class="tank-card">
+    <%= tank.name  %>
+    <%= tank.description  %>
+    <br>
+    <%= tank.price_per_day %> | <%= tank.price_per_day %>
+  </div>
+<% end %>
+<br>
+<%= link_to "Homepage", root_path , class: "btn btn-outline-primary" %>
