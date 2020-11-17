@@ -1,0 +1,11 @@
+<h1>Create a new tank</h1>
+<%= simple_form_for(@tank) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :weight_in_kg %>
+  <%= f.input :manufacturer %>
+  <%= f.input :price_per_day %>
+  <%= f.input :capacity %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.input :description %>
+  <%= f.submit "Submit", disable_with: 'Submiting...' %>
+<% end %>
