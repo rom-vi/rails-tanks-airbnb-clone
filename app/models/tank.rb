@@ -1,6 +1,7 @@
 class Tank < ApplicationRecord
   belongs_to :user
   has_many :bookings
+  has_many_attached :photo
 
   validates :name, presence: true
   validates :weight_in_kg, presence: true, numericality: true
