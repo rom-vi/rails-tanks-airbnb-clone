@@ -9,9 +9,10 @@ class TanksController < ApplicationController
 
   def create
     @tank = Tank.new(tank_params)
-    if @tank.save
+    @tank.user = current_user
+    if @tank.save!
       flash[:success] = "Tank successfully created"
-      redirect_to @tank
+      redirect_to tank_path(@tank)
     else
       flash[:error] = "Something went wrong"
       render 'new'
