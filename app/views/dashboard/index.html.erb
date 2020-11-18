@@ -26,9 +26,15 @@
         <p>Tank: <%= link_to booking.tank.name, tank_path(booking.tank)  %></p>
         <p>Total Price: <%= (booking.tank.price_per_day * total_days).to_i  %> €</p>
         <h3><%= booking.booking_status %></h3>
-        <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger",
-            method: :patch,
-            data: { confirm: "Are you sure"} %> 
+         <% if booking.booking_status == "Canceled" %>
+          <%= link_to 'Delete Booking', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger",
+              method: :delete,
+              data: { confirm: "Are you sure"} %>
+         <% else %>
+          <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger",
+              method: :patch,
+              data: { confirm: "Are you sure"} %>
+        <% end %>
       </div>
   <% end %>
   </div>
@@ -43,7 +49,7 @@
     <div class="booking-card container">
      <p>Who wants to rent: <%= booking.user.email %></p>
      <% total_days = (booking.to_date - booking.from_date) %>
-     <p>For <%= total_days.to_i %> Days and <%= (booking.tank.price_per_day * total_days).to_i %> €</p> 
+     <p>For <%= total_days.to_i %> Days and <%= (booking.tank.price_per_day * total_days).to_i %> €</p>
      <p>Between <%= booking.from_date  %> and <%= booking.to_date  %></p>
      <p><%= booking.booking_status  %></p>
           <%= link_to 'Accept', booking_path(booking, booking_status: "accepted"), class: "btn btn-success",
@@ -51,7 +57,7 @@
           data: { confirm: "Are you sure"} %>
           <%= link_to 'Decline', booking_path(booking, booking_status: "declined"), class: "btn btn-danger",
           method: :patch,
-          data: { confirm: "Are you sure"} %> 
+          data: { confirm: "Are you sure"} %>
     </div>
   <% end %>
   </div>

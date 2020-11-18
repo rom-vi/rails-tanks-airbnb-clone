@@ -1,7 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:edit, :update]
+  before_action :set_booking, only: [:edit, :update, :destroy]
   before_action :set_tank, only: [:new, :create]
-  
 
   def new
     @booking = Booking.new
@@ -18,23 +17,24 @@ class BookingsController < ApplicationController
     end
   end
 
-
   def edit
-    @booking = Booking.find(params[:id])
   end
 
   def update
-    @booking = Booking.find(params[:id])
     @booking.update(booking_status: params[:booking_status])
     redirect_to dashboard_path
   end
 
+  def destroy
+    @booking.destroy
+    redirect_to dashboard_path
+  end
 
   private
 
-   def set_booking
+  def set_booking
     @booking = Booking.find(params[:id])
-   end
+  end
 
   def set_tank
     @tank = Tank.find(params[:tank_id])
