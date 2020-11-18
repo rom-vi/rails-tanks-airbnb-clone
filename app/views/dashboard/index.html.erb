@@ -25,8 +25,10 @@
         <p>Total Days: <%= total_days.to_i %></p>
         <p>Tank: <%= link_to booking.tank.name, tank_path(booking.tank)  %></p>
         <p>Total Price: <%= (booking.tank.price_per_day * total_days).to_i  %> €</p>
-        <p>Here is the booking Status</p>
-        <p class="btn btn-danger"> Not yet implemented Button for Canceling</p>
+        <h3><%= booking.booking_status %></h3>
+        <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger",
+            method: :patch,
+            data: { confirm: "Are you sure"} %> 
       </div>
   <% end %>
   </div>
@@ -43,6 +45,13 @@
      <% total_days = (booking.to_date - booking.from_date) %>
      <p>For <%= total_days.to_i %> Days and <%= (booking.tank.price_per_day * total_days).to_i %> €</p> 
      <p>Between <%= booking.from_date  %> and <%= booking.to_date  %></p>
+     <p><%= booking.booking_status  %></p>
+          <%= link_to 'Accept', booking_path(booking, booking_status: "accepted"), class: "btn btn-success",
+          method: :patch,
+          data: { confirm: "Are you sure"} %>
+          <%= link_to 'Decline', booking_path(booking, booking_status: "declined"), class: "btn btn-danger",
+          method: :patch,
+          data: { confirm: "Are you sure"} %> 
     </div>
   <% end %>
   </div>
