@@ -1,9 +1,13 @@
 class TanksController < ApplicationController
-  before_action :set_tank, only: [:destroy]
+  before_action :set_tank, only: [:destroy, :show, :edit, :update]
 
   def index
-    @tanks = current_user.tanks
+    @tanks = current_user.tanks 
   end
+
+  def show
+  end
+
 
   def new
     @tank = Tank.new
@@ -24,6 +28,14 @@ class TanksController < ApplicationController
   def destroy
     @tank.destroy
     redirect_to tanks_path
+  end
+
+  def edit
+  end
+
+  def update
+    @tank.update(tank_params)
+    redirect_to tank_path(@tank)
   end
   
   private
