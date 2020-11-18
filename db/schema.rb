@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_102147) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "reviewstatus", default: false
-    t.boolean "bookingstatus", default: false
+    t.boolean "bookingstatus", default: true
     t.index ["tank_id"], name: "index_bookings_on_tank_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end

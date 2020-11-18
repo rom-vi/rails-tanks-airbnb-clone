@@ -1,25 +1,34 @@
 class BookingsController < ApplicationController
 
-  before_action :set_booking, only: [:update]
+  before_action :set_booking, only: [:accept!, :cancel!]
+  before_action :set_tank, only: [:new, :create]
+  
 
-  def update
-
+  def new
+    @booking = Booking.new
   end
 
-# need this later for the US implementation
-# def accept!
-#   reviewstatus = true
-#   bookingstatus = true
-# end
+  def create
+    @booking = Booking.new(params_bookings)
+    @booking.tank = @tank
+    @booking.user = current_user
+    if @booking.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
 
-# def reject!
-#   reviewstatus = true
-# end
+def accept!
+  @booking.reviewstatus = true
+  redirect_to dashboard_path
+end
 
-# def cancel!
-#   reviewstatus = true
-#   bookingstatus = false
-# end
+def cancel!
+  @booking.reviewstatus = true
+  @booking.bookingstatus = false
+  redirect_to dashboard_path
+end
 
 
 
@@ -27,5 +36,13 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def set_tank
+    @tank = Tank.find(params[:tank_id])
+  end
+
+  def params_bookings
+    params.require(:booking).permit(:from_date, :to_date) # , :reviewstatus, :bookingstatus
   end
 end
