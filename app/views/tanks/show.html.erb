@@ -17,4 +17,6 @@
 <%= link_to 'Delete', tank_path(@tank), class: "btn btn-outline-danger",
       method: :delete,
       data: { confirm: "Are you sure"} %>
+<%= link_to 'Book this tank', new_tank_booking_path(@tank), class: "btn btn-outline-warning" %>
+
 
