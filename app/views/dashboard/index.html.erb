@@ -8,9 +8,10 @@
     <h2>Your <%= link_to "Tanks", tanks_path() %></h2>
     <% @tanks.each do |tank| %>
       <div class="tank-card">
-        <%= tank.name  %>
+        <%= link_to tank.name, tank_path(tank) %>
         <%= tank.description  %>
         <br>
+        
         <%= tank.price_per_day %> | <%= tank.capacity %>
       </div>
     <% end %>
