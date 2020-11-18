@@ -1,0 +1,5 @@
+<%= simple_form_for([@tank, @booking]) do |f| %>
+  <%= f.input :from_date %>
+  <%= f.input :to_date %>
+  <%= f.submit "Submit", disable_with: 'Submiting...' %>
+<% end %>

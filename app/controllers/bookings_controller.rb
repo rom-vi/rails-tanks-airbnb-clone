@@ -1,11 +1,7 @@
 class BookingsController < ApplicationController
-
-  before_action :set_booking, only: [:edit, :update] #:accept!, :cancel!,
+  before_action :set_booking, only: [:edit, :update]
   before_action :set_tank, only: [:new, :create]
   
-  def show
-    @booking = Booking.find(params[:id])
-  end
 
   def new
     @booking = Booking.new
@@ -22,16 +18,7 @@ class BookingsController < ApplicationController
     end
   end
 
-# def accept!
-#   @booking.reviewstatus = true
-#   redirect_to dashboard_path
-# end
 
-# def cancel!
-#   @booking.reviewstatus = true
-#   @booking.bookingstatus = false
-#   redirect_to dashboard_path
-# end#
   def edit
     @booking = Booking.find(params[:id])
   end
@@ -43,12 +30,11 @@ class BookingsController < ApplicationController
   end
 
 
-
   private
 
-  def set_booking
+   def set_booking
     @booking = Booking.find(params[:id])
-  end
+   end
 
   def set_tank
     @tank = Tank.find(params[:tank_id])

@@ -29,6 +29,7 @@
                 <div class="card-tank-values">
                   <p><%= tank.name  %></p>
                   <p><%= tank.capacity %></p>
+                  <%= link_to 'Look at this tank', tank_path(tank), class: "btn btn-outline-warning" %>
                   <h2 class="card-tank-pricing"><%= tank.price_per_day %>€</h2>
                 </div>
               <br>
