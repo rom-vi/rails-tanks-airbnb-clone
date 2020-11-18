@@ -11,11 +11,21 @@
 <!-- Tanks-->
 <div class="">
   <% Tank.all.each do |tank| %>
-    <div class="tank-card">
-      <%= tank.name  %>
-      <%= tank.description  %>
-      <br>
-      <%= tank.price_per_day %> | <%= tank.capacity %>
+    <div class="card-tank">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+        <div class="card-tank-infos">
+          <div class="card-tank-headers">
+            <p>MODEL</p>
+            <p>CAPACITY</p>
+            <p>price/day</p>
+          </div>
+          <div class="card-tank-values">
+            <p><%= tank.name  %></p>
+            <p><%= tank.capacity %></p>
+            <h2 class="card-tank-pricing"><%= tank.price_per_day %>€</h2>
+          </div>
+        <br>
+      </div>
     </div>
   <% end %>
 </div>
