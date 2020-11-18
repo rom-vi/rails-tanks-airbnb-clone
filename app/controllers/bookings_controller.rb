@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
-  # before_action :set_booking, only: [:accept!, :cancel!]
+  before_action :set_booking, only: [:edit, :update]
   before_action :set_tank, only: [:new, :create]
+  
 
   def new
     @booking = Booking.new
@@ -17,16 +18,17 @@ class BookingsController < ApplicationController
     end
   end
 
-  def accept!
-    @booking.reviewstatus = true
+
+  def edit
+    @booking = Booking.find(params[:id])
+  end
+
+  def update
+    @booking = Booking.find(params[:id])
+    @booking.update(booking_status: params[:booking_status])
     redirect_to dashboard_path
   end
 
-  def cancel!
-    @booking.reviewstatus = true
-    @booking.bookingstatus = false
-    redirect_to dashboard_path
-  end
 
   private
 
