@@ -21,11 +21,13 @@ class BookingsController < ApplicationController
   end
 
   def update
+    authorize @booking
     @booking.update(booking_status: params[:booking_status])
     redirect_to dashboard_path
   end
 
   def destroy
+    authorize @booking
     @booking.destroy
     redirect_to dashboard_path
   end
@@ -33,6 +35,7 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
+    
     @booking = Booking.find(params[:id])
   end
 
