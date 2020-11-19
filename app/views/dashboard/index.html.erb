@@ -5,7 +5,7 @@
 
 <div class="container", style="display: flex">
   <div class="container">
-    <h2>Your <%= link_to "Tanks", tanks_path() %></h2>
+    <h2>Your <%= link_to "Tanks", your_tanks_path() %></h2>
     <% @tanks.each do |tank| %>
       <div class="tank-card">
         <%= link_to tank.name, tank_path(tank) %>

@@ -1,9 +1,20 @@
 class TanksController < ApplicationController
   before_action :set_tank, only: [:destroy, :show, :edit, :update]
 
+  
   def index
-    @tanks = current_user.tanks 
+    if params[:query].present?
+      sql_query = " \
+        tanks.name @@ :query \
+        OR tanks.description @@ :query \
+        OR tanks.manufacturer @@ :query \
+      "
+      @tanks = Tank.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @tanks = Tank.all
+    end
   end
+
 
   def show
   end
