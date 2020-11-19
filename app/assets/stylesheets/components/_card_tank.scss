@@ -3,13 +3,13 @@
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 2px;
-  width: 600px;
-  height: 400px;
+  width: 400px;
+  height: 300px;
 }
 
 .card-tank > img {
   padding: 16px;
-  height: 320px;
+  height: 80%;
   width: 100%;
   object-fit: cover;
 }
@@ -28,11 +28,8 @@
 
 
 .card-tank .card-tank-infos {
-  padding: 16px;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   position: relative;
+  padding: 0 16px;
+
 }
 
 .text-align-center {
