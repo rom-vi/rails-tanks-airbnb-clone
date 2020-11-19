@@ -1,8 +1,8 @@
 class TanksController < ApplicationController
   before_action :set_tank, only: [:destroy, :show, :edit, :update]
 
-  
   def index
+    @tanks = policy_scope(Tank)
     if params[:query].present?
       sql_query = " \
         tanks.name @@ :query \
@@ -14,7 +14,6 @@ class TanksController < ApplicationController
       @tanks = Tank.all
     end
   end
-
 
   def show
     authorize @tank
