@@ -1,58 +1,57 @@
-<!-- HEADER -->
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.1)), url(https://i.ytimg.com/vi/TIyqEwNgqVk/maxresdefault.jpg);">
-  <div class="container">
+<!-- BANNER -->
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0)), url(https://i.ytimg.com/vi/TIyqEwNgqVk/maxresdefault.jpg);">
+  <div class="container pb-5">
     <h1>Find your Tank</h1>
     <p>Pimp your warcrime: Tanks for rent across the globe</p>
-    <a class="btn btn-flat" href="#">Find Tank</a>
+    <%= render "search", tanks: @tanks %>
   </div>
-</div>
-<!-- HEADER END -->
-<%= render "search", tanks: @tanks %>
-<!-- Tanks-->
-<div class="px-5 pt-5">
-  <div class="row px-1 pb-5 justify-content-around">
-    <% Tank.all.each do |tank| %>
-      <div class="pb-5">
-        <div class="col-12 col-xl-3 col-lg-4 clo-md-6">
-          <div class="card-tank">
-            <% if tank.photos.present? %>
-              <%= cl_image_tag tank.photos.first.key, height: 300, width: 400, crop: :fill %>
-            <% else %>
-              <%= cl_image_tag 'tank1_xkesh5', height: 300, width: 400, crop: :fill %>
-            <% end %>
-              <div class="card-tank-infos justify-content-between">
-                <div class="card-tank-headers">
-                  <p class="w-25">MODEL</p>
-                  <p>CAPACITY</p>
-                  <p class="w-25 text-right">price/day</p>
-                </div>
-                <div class="card-tank-values">
-                  <p class="w-25"><%= tank.name  %></p>
-                  <p><%= tank.capacity %></p>
-                  <%#= link_to 'Look at this tank', tank_path(tank), class: "btn btn-outline-warning" %>
-                  <h2 class="card-tank-pricing w-25 text-right"><%= tank.price_per_day %>€</h2>
-                </div>
-              <br>
+
+  <!-- Tanks-->
+  <div class="px-5 pt-5 mt-5">
+    <div class="row px-1 pb-5 justify-content-around">
+      <% Tank.all.each do |tank| %>
+        <div class="pb-5">
+          <div class="col-12 col-xl-3 col-lg-4 clo-md-6">
+            <div class="card-tank">
+              <% if tank.photos.present? %>
+                <%= cl_image_tag tank.photos.first.key, height: 300, width: 400, crop: :fill %>
+              <% else %>
+                <%= cl_image_tag 'tank1_xkesh5', height: 300, width: 400, crop: :fill %>
+              <% end %>
+                <div class="card-tank-infos justify-content-between">
+                  <div class="card-tank-headers">
+                    <p class="w-25">MODEL</p>
+                    <p>CAPACITY</p>
+                    <p class="w-25 text-right">price/day</p>
+                  </div>
+                  <div class="card-tank-values">
+                    <p class="w-25"><%= tank.name  %></p>
+                    <p><%= tank.capacity %></p>
+                    <%#= link_to 'Look at this tank', tank_path(tank), class: "btn btn-outline-warning" %>
+                    <h2 class="card-tank-pricing w-25 text-right"><%= tank.price_per_day %>€</h2>
+                  </div>
+                <br>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
-
-
+<!-- BANNER END -->
 <!-- FOOTER -->
-<div class="footer">
-  <div class="footer-links">
-    <a href="#"><i class="fab fa-github"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin"></i></a>
+  <div class="footer">
+    <div class="footer-links">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div class="footer-copyright">
+      If you have a big <i class="fas fa-heart"></i> visit <%= link_to "/", class: "navbar-brand" do %> long-term-giving<% end %>
+    </div>
   </div>
-  <div class="footer-copyright">
-    If you have a big <i class="fas fa-heart"></i> visit <%= link_to "/", class: "navbar-brand" do %> long-term-giving<% end %>
-  </div>
-</div>
 <!-- FOOTER END -->
+  </div>
+
