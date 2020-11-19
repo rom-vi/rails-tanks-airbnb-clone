@@ -10,7 +10,7 @@
 <%= render "search", tanks: @tanks %>
 <!-- Tanks-->
 <div class="px-5 pt-5">
-  <div class="row px-5 pb-5 justify-content-around">
+  <div class="row px-1 pb-5 justify-content-around">
     <% Tank.all.each do |tank| %>
       <div class="pb-5">
         <div class="col-12 col-xl-3 col-lg-4 clo-md-6">
@@ -20,17 +20,17 @@
             <% else %>
               <%= cl_image_tag 'tank1_xkesh5', height: 300, width: 400, crop: :fill %>
             <% end %>
-              <div class="card-tank-infos">
+              <div class="card-tank-infos justify-content-between">
                 <div class="card-tank-headers">
-                  <p>MODEL</p>
+                  <p class="w-25">MODEL</p>
                   <p>CAPACITY</p>
-                  <p>price/day</p>
+                  <p class="w-25 text-right">price/day</p>
                 </div>
                 <div class="card-tank-values">
-                  <p><%= tank.name  %></p>
+                  <p class="w-25"><%= tank.name  %></p>
                   <p><%= tank.capacity %></p>
-                  <%= link_to 'Look at this tank', tank_path(tank), class: "btn btn-outline-warning" %>
-                  <h2 class="card-tank-pricing"><%= tank.price_per_day %>€</h2>
+                  <%#= link_to 'Look at this tank', tank_path(tank), class: "btn btn-outline-warning" %>
+                  <h2 class="card-tank-pricing w-25 text-right"><%= tank.price_per_day %>€</h2>
                 </div>
               <br>
             </div>
