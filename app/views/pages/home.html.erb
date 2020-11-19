@@ -6,12 +6,15 @@
     <%= render "search", tanks: @tanks %>
   </div>
 
+ 
+    
   <!-- Tanks-->
   <div class="px-5 pt-5 mt-5">
     <div class="row px-1 pb-5 justify-content-around">
       <% Tank.all.each do |tank| %>
         <div class="pb-5">
           <div class="col-12 col-xl-3 col-lg-4 clo-md-6">
+            <%= link_to tank_path(tank) do %>
             <div class="card-tank">
               <% if tank.photos.present? %>
                 <%= cl_image_tag tank.photos.first.key, height: 300, width: 400, crop: :fill %>
@@ -33,6 +36,7 @@
                 <br>
               </div>
             </div>
+            <% end %>
           </div>
         </div>
       <% end %>
