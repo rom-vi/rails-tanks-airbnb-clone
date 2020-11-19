@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :bookings, only: [:show, :update, :destroy]
   get "/dashboard", to: "dashboard#index"
   get "/your_tanks", to: "your_tanks#index"
+  resources :your_tanks, only: [:destroy]
 end

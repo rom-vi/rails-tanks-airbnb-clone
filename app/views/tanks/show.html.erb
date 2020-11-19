@@ -15,7 +15,7 @@
 </div>
   <% if @tank.user == current_user %>
     <%= link_to 'Edit', edit_tank_path(@tank), class: "btn btn-outline-warning" %>
-    <%= link_to 'Delete', tank_path(@tank), class: "btn btn-outline-danger",
+    <%= link_to 'Delete',  your_tank_path(@tank), class: "btn btn-outline-danger",
           method: :delete,
           data: { confirm: "Are you sure"} %>
   <% else %>
