@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
   resources :bookings, only: [:show, :edit, :update, :destroy]
   get "/dashboard", to: "dashboard#index"
+  get "/your_tanks", to: "your_tanks#index"
 end

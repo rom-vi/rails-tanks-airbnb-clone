@@ -1,11 +1,14 @@
-<p>all tanks</p>
-<%= render "search", tanks: @tanks %>
+<p>all your tanks</p>
 <% @tanks.each do |tank| %>
   <div class="tank-card">
     <%= tank.name  %>
     <%= tank.description  %>
     <br>
     <%= tank.price_per_day %> | <%= tank.capacity %>
+    <%= link_to 'Edit', edit_tank_path(tank), class: "btn btn-outline-warning" %>
+    <%= link_to 'Delete', tank_path(tank), class: "btn btn-outline-danger",
+      method: :delete,
+      data: { confirm: "Are you sure"} %> 
   </div>
 <% end %>
 <br>
