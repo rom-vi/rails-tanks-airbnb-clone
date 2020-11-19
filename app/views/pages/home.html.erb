@@ -13,30 +13,40 @@
   <div class="row px-5 pb-5 justify-content-around">
     <% Tank.all.each do |tank| %>
       <div class="pb-5">
-        <div class="col-12 col-xl-3 col-lg-4 clo-md-6">
-          <div class="card-tank">
-            <% if tank.photos.present? %>
-              <%= cl_image_tag tank.photos.first.key, height: 300, width: 400, crop: :fill %>
-            <% else %>
-              <%= cl_image_tag 'tank1_xkesh5', height: 300, width: 400, crop: :fill %>
-            <% end %>
-              <div class="card-tank-infos">
-                <div class="card-tank-headers">
-                  <p>MODEL</p>
-                  <p>CAPACITY</p>
-                  <p>price/day</p>
+          <div class="col-12 col-xl-3 col-lg-4 clo-md-6">
+          <%= link_to tank_path(tank), class: "tank-link" do %>
+            <div class="card-tank">
+              <% if tank.photos.present? %>
+                <%= cl_image_tag tank.photos.first.key, height: 300, width: 400, crop: :fill %>
+              <% else %>
+                <%= cl_image_tag 'tank1_xkesh5', height: 300, width: 400, crop: :fill %>
+              <% end %>
+
+
+                <div class="d-flex justify-content-around text-align-center">
+                  <div class="p-2 flex-fill text-align-center">
+                    <p>MODEL</p>
+                    <p><%= tank.name %></p>
+                  </div>
+
+                  <div class="p-2 flex-fill text-align-center">
+                    <p>CAPACITY</p>
+                    <p><%= tank.capacity %></p>
+                  </div>
+
+                  <div class="p-2 flex-fill text-align-center">
+                    <p>price/day</p>
+                    <h2 class="card-tank-pricing"><%= tank.price_per_day %>€</h2>
+                  </div>
+                  <br>
                 </div>
-                <div class="card-tank-values">
-                  <p><%= tank.name  %></p>
-                  <p><%= tank.capacity %></p>
-                  <%= link_to 'Look at this tank', tank_path(tank), class: "btn btn-outline-warning" %>
-                  <h2 class="card-tank-pricing"><%= tank.price_per_day %>€</h2>
-                </div>
-              <br>
+
+
+
             </div>
+          <% end %>
           </div>
         </div>
-      </div>
     <% end %>
   </div>
 </div>

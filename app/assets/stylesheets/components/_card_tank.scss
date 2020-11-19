@@ -31,22 +31,13 @@
   padding: 16px;
 //   display: flex;
 //   justify-content: space-between;
-//   align-items: flex-end;
+//   align-items: center;
 //   position: relative;
 }
 
-.card-tank-headers {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 4px;
+.text-align-center {
+  text-align: center;
 }
-
-.card-tank-values {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-}
-
 // .card-tank-infos .card-tank-user {
 //   position: absolute;
 //   right: 16px;
