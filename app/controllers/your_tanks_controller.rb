@@ -1,5 +1,5 @@
 class YourTanksController < ApplicationController
     def index
-        @tanks = current_user.tanks
+        @tanks = policy_scope(current_user.tanks)
     end
 end
