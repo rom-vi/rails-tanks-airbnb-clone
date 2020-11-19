@@ -1,4 +1,4 @@
-<%= simple_form_for tanks_path, method: :get do %>
+<%= form_tag tanks_path, method: :get do %>
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
