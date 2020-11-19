@@ -1,4 +1,8 @@
 class TankPolicy < ApplicationPolicy
+  def index?
+    true
+  end
+
   def show?
     true
   end
@@ -17,7 +21,7 @@ class TankPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope
+      scope.all
     end
   end
 end
