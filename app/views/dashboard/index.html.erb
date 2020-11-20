@@ -72,36 +72,40 @@
 </div>
 
 <h2>My tanks and their upcoming bookings (by other people)</h2>
-
+<% any_bookings = false %>
 <% @tanks.each do |tank| %>
-  <div class="container">
-  <h3><%= tank.name  %></h3>
-  <% tank.bookings.each do |booking| %>
-    <div class="booking-card container">
-     <p>Who wants to rent: <%= booking.user.email %></p>
-     <% total_days = (booking.to_date - booking.from_date) %>
-     <p>For <%= total_days.to_i %> Days and <%= (booking.tank.price_per_day * total_days).to_i %> €</p>
-     <p>Between <%= booking.from_date  %> and <%= booking.to_date  %></p>
-     <p><%= booking.booking_status  %></p>
-     <% if booking.booking_status == "in Review" %>
-        <%= link_to 'Accept', booking_path(booking, booking_status: "Accepted"), class: "btn btn-success btn-lg",
-        method: :patch,
-        data: { confirm: "Are you sure"} %>
-        <%= link_to 'Decline', booking_path(booking, booking_status: "Declined"), class: "btn btn-danger btn-lg",
-        method: :patch,
-        data: { confirm: "Are you sure"} %>
-      <% elsif booking.booking_status == "Accepted" %>
-        <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger btn-lg",
-        method: :patch,
-        data: { confirm: "Are you sure"} %>
-      <% else %>
-        <%= link_to 'Delete Booking', booking_path(booking, booking_status: "Canceled"), class: "btn btn-outline-danger btn-lg",
-        method: :delete,
-        data: { confirm: "Are you sure"} %>
-      <% end %>
+  <% if tank.bookings.present? %>
+    <% any_bookings = true %>
+    <div class="container">
+    <h3><%= tank.name  %></h3>
+    <% tank.bookings.each do |booking| %>
+      <div class="booking-card container">
+        <p>Who wants to rent: <%= booking.user.email %></p>
+        <% total_days = (booking.to_date - booking.from_date) %>
+        <p>For <%= total_days.to_i %> Days and <%= (booking.tank.price_per_day * total_days).to_i %> €</p>
+        <p>Between <%= booking.from_date  %> and <%= booking.to_date  %></p>
+        <p><%= booking.booking_status  %></p>
+        <% if booking.booking_status == "in Review" %>
+          <%= link_to 'Accept', booking_path(booking, booking_status: "Accepted"), class: "btn btn-success btn-lg",
+            method: :patch,
+            data: { confirm: "Are you sure"} %>
+          <%= link_to 'Decline', booking_path(booking, booking_status: "Declined"), class: "btn btn-danger btn-lg",
+            method: :patch,
+            data: { confirm: "Are you sure"} %>
+        <% elsif booking.booking_status == "Accepted" %>
+          <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger btn-lg",
+            method: :patch,
+            data: { confirm: "Are you sure"} %>
+        <% else %>
+          <%= link_to 'Delete Booking', booking_path(booking, booking_status: "Canceled"), class: "btn btn-outline-danger btn-lg",
+            method: :delete,
+            data: { confirm: "Are you sure"} %>
+        <% end %>
+      </div>
+    <% end %>
     </div>
   <% end %>
-  </div>
-
-
+<% end %>
+<% unless any_bookings %>
+  <h2>Bookings will be shown here.</h2>
 <% end %>
