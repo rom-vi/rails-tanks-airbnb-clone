@@ -3,7 +3,7 @@
 <h3>Your Total earnings (past & present) are: <%= @earnings  %>€</h3>
 
 
-<div class="container", style="display: flex">
+<div class="container-fluid", style="display: flex">
   <div class="container">
     <h2>Your <%= link_to "Tanks", your_tanks_path() %></h2>
     <% @tanks.each do |tank| %>
@@ -18,27 +18,51 @@
   </div>
 
   <div class="container">
-  <h2>My Bookings</h2>
-  <% @bookings.each do |booking| %>
-      <div class="booking-card container" >
-        <p>From <%= booking.from_date  %> to <%= booking.to_date %></p>
-        <% total_days = (booking.to_date - booking.from_date) %>
-        <p>Total Days: <%= total_days.to_i %></p>
-        <p>Tank: <%= link_to booking.tank.name, tank_path(booking.tank)  %></p>
-        <p>Total Price: <%= (booking.tank.price_per_day * total_days).to_i  %> €</p>
-        <h3><%= booking.booking_status %></h3>
-         <% if booking.booking_status == "Canceled" %>
-          <%= link_to 'Delete Booking', booking_path(booking, booking_status: "Canceled"), class: "btn btn-outline-danger",
-              method: :delete,
-              data: { confirm: "Are you sure"} %>
-         <% else %>
-          <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger",
-              method: :patch,
-              data: { confirm: "Are you sure"} %>
-        <% end %>
+    <h2>My Bookings</h2>
+    <% @bookings.each do |booking| %>
+      <div class="card mb-3" style="max-width: 780px;">
+        <div class="row bg-light">
+          <div class="col-lg-6 col-xl-6 pl-0">
+            <% if booking.tank.photos.present? %>
+              <%= cl_image_tag booking.tank.photos.first.key, height: 300, width: 300, crop: :fill%>
+            <% else %>
+              <%= cl_image_tag 'tank1_xkesh5', height: 300, width: 300, crop: :fill %>
+            <% end %>
+          </div>
+          <div class="col-lg-7 col-xl-6">
+            <div class="card-body">
+              <h3 class="card-title">
+                From <%= booking.from_date  %> to <%= booking.to_date %>
+              </h3>
+                <% total_days = (booking.to_date - booking.from_date) %>
+                <p class="card-text">
+                  Total Days: <%= total_days.to_i %>
+                </p>
+                <p class="card-text">
+                  Tank: <%= link_to booking.tank.name, tank_path(booking.tank) %>
+                </p>
+                <p class="card-text">
+                  Total Price: <%= (booking.tank.price_per_day * total_days).to_i  %> €
+                </p>
+                <h3>
+                  <%= booking.booking_status %>
+                </h3>
+                <% if booking.booking_status == "Canceled" %>
+                  <%= link_to 'Delete Booking', booking_path(booking, booking_status: "Canceled"), class: "btn btn-outline-danger",
+                    method: :delete,
+                    data: { confirm: "Are you sure"} %>
+                <% else %>
+                <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger",
+                  method: :patch,
+                  data: { confirm: "Are you sure"} %>
+                <% end %>
+            </div>
+          </div>
+        </div>
       </div>
-  <% end %>
+   <% end %>
   </div>
+
 </div>
 
 <h2>My tanks and their upcoming bookings (by other people)</h2>
