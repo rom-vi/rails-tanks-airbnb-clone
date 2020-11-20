@@ -4,20 +4,19 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new
+    authorize @booking
   end
 
   def create
     @booking = Booking.new(params_bookings)
     @booking.tank = @tank
     @booking.user = current_user
+    authorize @booking
     if @booking.save
       redirect_to root_path
     else
       render :new
     end
-  end
-
-  def edit
   end
 
   def update
@@ -35,7 +34,6 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
-    
     @booking = Booking.find(params[:id])
   end
 

@@ -21,6 +21,7 @@ class TanksController < ApplicationController
 
   def new
     @tank = Tank.new
+    authorize @tank
   end
 
   def create
