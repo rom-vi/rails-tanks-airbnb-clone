@@ -1,21 +1,51 @@
 <p><%= @user.email  %></p>
 
 <h3>Your Total earnings (past & present) are: <%= @earnings  %>€</h3>
-
-
+<br>
 <div class="container-fluid", style="display: flex">
-  <div class="container">
-    <h2>Your <%= link_to "Tanks", your_tanks_path() %></h2>
+  <div class="container", style="max-width: 700px;">
+    <h2>My tanks and their upcoming bookings (by other people)</h2>
+    <% any_bookings = false %>
     <% @tanks.each do |tank| %>
-      <div class="tank-card">
-        <%= link_to tank.name, tank_path(tank) %>
-        <%= tank.description  %>
-        <br>
-        
-        <%= tank.price_per_day %> | <%= tank.capacity %>
-      </div>
+      <% if tank.bookings.present? %>
+        <% any_bookings = true %>
+        <div class="card mb-2 bg-light">
+          <div class="card-body">
+          <h3 class="card-title"><%= tank.name  %></h3>
+          <% tank.bookings.each do |booking| %>
+            <div class="******">
+              <p class="card-subtitle mb-1">Who wants to rent: <%= booking.user.email %></p>
+              <% total_days = (booking.to_date - booking.from_date) %>
+              <p class="card-subtitle mb-1">For <%= total_days.to_i %> Days and <%= (booking.tank.price_per_day * total_days).to_i %> €</p>
+              <p class="card-subtitle mb-1">Between <%= booking.from_date  %> and <%= booking.to_date  %></p>
+              <p class="card-subtitle mb-1"><%= booking.booking_status  %></p>
+              <% if booking.booking_status == "in Review" %>
+                <%= link_to 'Accept', booking_path(booking, booking_status: "Accepted"), class: "btn btn-success btn-lg",
+                  method: :patch,
+                  data: { confirm: "Are you sure"} %>
+                <%= link_to 'Decline', booking_path(booking, booking_status: "Declined"), class: "btn btn-danger btn-lg",
+                  method: :patch,
+                  data: { confirm: "Are you sure"} %>
+              <% elsif booking.booking_status == "Accepted" %>
+                <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger btn-lg",
+                  method: :patch,
+                  data: { confirm: "Are you sure"} %>
+              <% else %>
+                <%= link_to 'Delete Booking', booking_path(booking, booking_status: "Canceled"), class: "btn btn-outline-danger btn-lg",
+                  method: :delete,
+                  data: { confirm: "Are you sure"} %>
+              <% end %>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <% unless any_bookings %>
+      <h2>Bookings will be shown here.</h2>
     <% end %>
   </div>
+
 
   <div class="container">
     <h2>My Bookings</h2>
@@ -68,44 +98,19 @@
       </div>
    <% end %>
   </div>
-
 </div>
-
-<h2>My tanks and their upcoming bookings (by other people)</h2>
-<% any_bookings = false %>
-<% @tanks.each do |tank| %>
-  <% if tank.bookings.present? %>
-    <% any_bookings = true %>
-    <div class="container">
-    <h3><%= tank.name  %></h3>
-    <% tank.bookings.each do |booking| %>
-      <div class="booking-card container">
-        <p>Who wants to rent: <%= booking.user.email %></p>
-        <% total_days = (booking.to_date - booking.from_date) %>
-        <p>For <%= total_days.to_i %> Days and <%= (booking.tank.price_per_day * total_days).to_i %> €</p>
-        <p>Between <%= booking.from_date  %> and <%= booking.to_date  %></p>
-        <p><%= booking.booking_status  %></p>
-        <% if booking.booking_status == "in Review" %>
-          <%= link_to 'Accept', booking_path(booking, booking_status: "Accepted"), class: "btn btn-success btn-lg",
-            method: :patch,
-            data: { confirm: "Are you sure"} %>
-          <%= link_to 'Decline', booking_path(booking, booking_status: "Declined"), class: "btn btn-danger btn-lg",
-            method: :patch,
-            data: { confirm: "Are you sure"} %>
-        <% elsif booking.booking_status == "Accepted" %>
-          <%= link_to 'Cancel', booking_path(booking, booking_status: "Canceled"), class: "btn btn-danger btn-lg",
-            method: :patch,
-            data: { confirm: "Are you sure"} %>
-        <% else %>
-          <%= link_to 'Delete Booking', booking_path(booking, booking_status: "Canceled"), class: "btn btn-outline-danger btn-lg",
-            method: :delete,
-            data: { confirm: "Are you sure"} %>
-        <% end %>
-      </div>
-    <% end %>
+<br>
+<br>
+<div class="p-5">
+  <h2>Your <%= link_to "Tanks", your_tanks_path() %></h2>
+  <% @tanks.each do |tank| %>
+    <div class="tank-card">
+      <%= link_to tank.name, tank_path(tank) %>
+      <%= tank.description  %>
+      <br>
+      
+      <%= tank.price_per_day %> | <%= tank.capacity %>
     </div>
   <% end %>
-<% end %>
-<% unless any_bookings %>
-  <h2>Bookings will be shown here.</h2>
-<% end %>
+</div>
+
