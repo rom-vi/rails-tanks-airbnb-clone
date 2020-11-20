@@ -1,11 +1,13 @@
 <div class="container">
   <div class="p-5 bg-light">
     <div class="tank-card">
-      <h2><%= @tank.name  %></h2>
+      <h2 class="tank-page"><%= @tank.name  %></h2>
     </div>
-    <% @tank.photos.each do |photo| %>
-      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-    <% end %>
+    <div class="tank-page-img">
+      <% @tank.photos.each do |photo| %>
+        <%= cl_image_tag photo.key, crop: :fill %>
+      <% end %>
+    </div>
     <div class="text-center">
       <%= @tank.description  %>
       <br><br>
@@ -17,7 +19,7 @@
     </div>
     <div class="container px-5">
         <% if @tank.user == current_user %>
-        <div class="row px-3">
+        <div class="row px-3 tank-page-btn">
           <div class="mx-3">
           <%= link_to 'Edit', edit_tank_path(@tank), class: "btn btn-outline-warning" %>
           </div>
@@ -28,7 +30,7 @@
           </div>
         </div>
         <% else %>
-          <div>
+          <div class="tank-page tank-page-btn">
             <%= link_to 'Book this tank', new_tank_booking_path(@tank), class: "btn btn-outline-warning" %>
           </div>
         <% end %>

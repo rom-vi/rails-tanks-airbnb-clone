@@ -1,9 +1,26 @@
-.tank-card {
+.tank-page {
   text-align: center;
 }
 
-img, a {
+.tank-page {
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-bottom: 8px;
+}
+
+.tank-page-img {
+  display: flex;
+  margin: auto;
+}
+
+.tank-page-img img {
+  width: 20em;
+  height: 15em;
+}
+
+.tank-page-btn {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
