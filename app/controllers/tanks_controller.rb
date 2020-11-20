@@ -30,7 +30,7 @@ class TanksController < ApplicationController
     authorize @tank
     if @tank.save!
       flash[:success] = "Tank successfully created"
-      redirect_to tanks_path
+      redirect_to dashboard_path
     else
       flash[:error] = "Something went wrong"
       render 'new'
